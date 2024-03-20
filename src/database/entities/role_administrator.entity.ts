@@ -3,13 +3,16 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Status } from "./enums/status.enum";
+import { Administrator } from "./administrator.entity";
 
 @Entity()
-export class RoleAdministraror {
+export class RoleAdministrator {
   @PrimaryGeneratedColumn({
     comment: "Llave primaria rol del adimistrador",
   })
@@ -25,6 +28,9 @@ export class RoleAdministraror {
     comment: "Estado del rol del administrador:activo o inactivo",
   })
   status: string;
+
+  @OneToMany(() => Administrator, (administrator) => administrator.roles) //un rol puede tener muchos administradores
+  administraror: Administrator[];
 
   @CreateDateColumn({ comment: "Fecha e creación del rol" })
   createAt: Date;

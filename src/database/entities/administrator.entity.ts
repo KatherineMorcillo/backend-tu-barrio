@@ -3,10 +3,14 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Status } from "./enums/status.enum";
+import { RoleAdministrator } from "./role_administrator.entity";
 
 @Entity()
 export class Administrator {
@@ -22,16 +26,22 @@ export class Administrator {
   @Column({ comment: "Correo electrónico del administrador" })
   email: string;
 
-  @Column({ comment: "Foto del administrator" })
+  @Column({ comment: "Foto del administrador" })
   photo: string;
 
   @Column({
     type: "enum",
     enum: Status,
     default: Status.active,
-    comment: "estado del administrador: activo e inactivo",
+    comment: "Estado del administrador: activo e inactivo",
   })
   status: string;
+
+  @ManyToOne(
+    () => RoleAdministrator,
+    (roleAdministrator) => roleAdministrator.administraror
+  ) //Un administrador puede tener un rol
+  roles: RoleAdministrator;
 
   @CreateDateColumn({ comment: "Fecha de creación del administrador" })
   createdAt: Date;
@@ -41,4 +51,5 @@ export class Administrator {
 
   @DeleteDateColumn({ comment: "Fecha de eliminación del administrador" })
   deleteAt: Date;
+  static roles: any;
 }
