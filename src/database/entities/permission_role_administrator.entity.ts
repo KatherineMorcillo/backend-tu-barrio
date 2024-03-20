@@ -9,11 +9,11 @@ import {
 import { Status } from "./enums/status.enum";
 
 @Entity()
-export class Permission_role_administrator {
-  @PrimaryGeneratedColumn("uuid", {
+export class PermissionRoleAdministrator {
+  @PrimaryGeneratedColumn({
     comment: "LLave primaria de permisos del rol del administrador",
   })
-  id: string;
+  id: number;
 
   @Column({ comment: "" })
   permission: string;
@@ -26,17 +26,17 @@ export class Permission_role_administrator {
   })
   status: string;
 
-  @Column({ comment: "Permidso de crear" })
-  created: string;
+  @Column({ comment: "Permiso de crear" })
+  created: boolean;
 
   @Column({ comment: "Permiso de actualizar" })
-  updated: string;
+  updated: boolean;
 
-  @Column({ comment: "Permiso de eleminar" })
-  deleted: string;
+  @Column({ comment: "Permiso de eliminar" })
+  deleted: boolean;
 
   @Column({ comment: "Permiso de visualizar" })
-  views: string;
+  views: boolean;
 
   @CreateDateColumn({
     comment: "Fecha de creación del permiso del rol del administrador",

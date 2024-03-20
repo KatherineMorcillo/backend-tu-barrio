@@ -9,16 +9,16 @@ import {
 import { Status } from "./enums/status.enum";
 
 Entity();
-export class Token_administrator {
-  @PrimaryGeneratedColumn("uuid", {
+export class TokenAdministrator {
+  @PrimaryGeneratedColumn({
     comment: "Llave primaria token del administrador",
   })
-  id: string;
+  id: number;
 
   @Column({ comment: "Token del administrador" })
   token: string;
 
-  @Column({ comment: "" })
+  @Column({ comment: "Fecha de uso del token" })
   useDate: string;
 
   @Column({

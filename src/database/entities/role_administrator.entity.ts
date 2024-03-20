@@ -9,11 +9,11 @@ import {
 import { Status } from "./enums/status.enum";
 
 @Entity()
-export class Role_administraror {
-  @PrimaryGeneratedColumn("uuid", {
+export class RoleAdministraror {
+  @PrimaryGeneratedColumn({
     comment: "Llave primaria rol del adimistrador",
   })
-  id: string;
+  id: number;
 
   @Column({ comment: "Nombre del rol del administrador" })
   name: string;
