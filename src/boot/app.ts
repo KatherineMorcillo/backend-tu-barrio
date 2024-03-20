@@ -1,19 +1,21 @@
 import express from "express";
 import * as http from "http";
-import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import routes from "../routes";
 
 export const initialApp = () => {
-  dotenv.config();
   const app = express();
 
   app.use(bodyParser.json());
   app.use(cors());
   app.use(helmet());
   app.use(morgan("dev"));
+
+  //Rutas
+  app.use(routes());
 
   const server = http.createServer(app);
 

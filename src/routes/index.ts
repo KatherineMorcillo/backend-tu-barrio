@@ -1,10 +1,10 @@
 import { Router } from "express";
-import appRouter from "./app.router";
+import v1 from "./v1";
 
 export default () => {
   const router = Router();
 
-  router.use("/", appRouter());
+  router.use("/v1", v1());
 
   return router;
 };
