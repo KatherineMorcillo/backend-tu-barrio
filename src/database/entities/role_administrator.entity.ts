@@ -30,7 +30,7 @@ export class RoleAdministrator {
   status: string;
 
   @OneToMany(() => Administrator, (administrator) => administrator.roles) //un rol puede tener muchos administradores
-  administraror: Administrator[];
+  administrator: Administrator[];
 
   @CreateDateColumn({ comment: "Fecha e creación del rol" })
   createAt: Date;

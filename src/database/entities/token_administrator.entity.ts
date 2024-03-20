@@ -3,10 +3,13 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Status } from "./enums/status.enum";
+import { Administrator } from "./administrator.entity";
 
 Entity();
 export class TokenAdministrator {
@@ -28,6 +31,9 @@ export class TokenAdministrator {
     comment: "Estado del token del administrador: inactivo o activo",
   })
   status: string;
+
+  @ManyToOne(() => Administrator, (administrator) => administrator.token) //muchos token pertenecen a un administrador
+  administrator: Administrator;
 
   @CreateDateColumn({ comment: "Fecha de creación del token" })
   createAt: Date;

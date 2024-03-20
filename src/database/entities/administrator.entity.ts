@@ -11,6 +11,7 @@ import {
 } from "typeorm";
 import { Status } from "./enums/status.enum";
 import { RoleAdministrator } from "./role_administrator.entity";
+import { TokenAdministrator } from "./token_administrator.entity";
 
 @Entity()
 export class Administrator {
@@ -39,9 +40,15 @@ export class Administrator {
 
   @ManyToOne(
     () => RoleAdministrator,
-    (roleAdministrator) => roleAdministrator.administraror
+    (roleAdministrator) => roleAdministrator.administrator
   ) //Un administrador puede tener un rol
   roles: RoleAdministrator;
+
+  @OneToMany(
+    () => TokenAdministrator,
+    (tokenAdministrator) => tokenAdministrator.administrator
+  ) //un administrador puede tener muchos token
+  token: TokenAdministrator[];
 
   @CreateDateColumn({ comment: "Fecha de creación del administrador" })
   createdAt: Date;
