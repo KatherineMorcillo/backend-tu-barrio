@@ -3,15 +3,17 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Status } from "./enums/status.enum";
+import { PermissionRoleAdministrator } from "./permission_role_administrator.entity";
 @Entity()
 export class ModulePermissionAdministrator {
   @PrimaryGeneratedColumn({
-    comment: "llave primaria módulo permisos del administrador ejem:prodctos",
+    comment: "LLave primaria módulo permisos del administrador ejem:productos",
   })
   id: string;
 
@@ -27,7 +29,13 @@ export class ModulePermissionAdministrator {
     default: Status.active,
     comment: "Estado del módulo",
   })
-  status: string;
+  status: Status;
+
+  @OneToMany(
+    () => PermissionRoleAdministrator,
+    (permissionRoleAdministrator) => permissionRoleAdministrator.module
+  ) // Un módulo puede tener muchos permisos
+  permissions: PermissionRoleAdministrator;
 
   @CreateDateColumn({ comment: "Fecha de creación del módulo" })
   createAt: Date;

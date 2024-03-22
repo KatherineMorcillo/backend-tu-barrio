@@ -11,7 +11,7 @@ import {
 import { Status } from "./enums/status.enum";
 import { Administrator } from "./administrator.entity";
 
-Entity();
+@Entity()
 export class TokenAdministrator {
   @PrimaryGeneratedColumn({
     comment: "Llave primaria token del administrador",
@@ -30,9 +30,9 @@ export class TokenAdministrator {
     default: Status.active,
     comment: "Estado del token del administrador: inactivo o activo",
   })
-  status: string;
+  status: Status;
 
-  @ManyToOne(() => Administrator, (administrator) => administrator.token) //muchos token pertenecen a un administrador
+  @ManyToOne(() => Administrator, (administrator) => administrator.tokens) // Muchos token pertenecen a un administrador
   administrator: Administrator;
 
   @CreateDateColumn({ comment: "Fecha de creación del token" })

@@ -3,10 +3,13 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Status } from "./enums/status.enum";
+import { RoleAdministrator } from "./role_administrator.entity";
+import { ModulePermissionAdministrator } from "./module_permission_administrator.entity";
 
 @Entity()
 export class PermissionRoleAdministrator {
@@ -15,7 +18,7 @@ export class PermissionRoleAdministrator {
   })
   id: number;
 
-  @Column({ comment: "" })
+  @Column({ comment: "Nombre del permiso" })
   permission: string;
 
   @Column({
@@ -37,6 +40,18 @@ export class PermissionRoleAdministrator {
 
   @Column({ comment: "Permiso de visualizar" })
   views: boolean;
+
+  @ManyToOne(
+    () => RoleAdministrator,
+    (roleAdministrator) => roleAdministrator.permissionRoleAdministrator
+  ) // Muchos permisos puede tener un rol administrador
+  roleAdministrator: RoleAdministrator;
+
+  @ManyToOne(
+    () => ModulePermissionAdministrator,
+    (modulePermissionAdministrator) => modulePermissionAdministrator.permissions
+  ) // Muchos modulos pertenecen a un rol administrador
+  module: ModulePermissionAdministrator;
 
   @CreateDateColumn({
     comment: "Fecha de creación del permiso del rol del administrador",

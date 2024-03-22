@@ -3,13 +3,13 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Status } from "./enums/status.enum";
 import { Administrator } from "./administrator.entity";
+import { PermissionRoleAdministrator } from "./permission_role_administrator.entity";
 
 @Entity()
 export class RoleAdministrator {
@@ -24,13 +24,23 @@ export class RoleAdministrator {
   @Column({
     type: "enum",
     enum: Status,
-    default: Status,
+    default: Status.active,
     comment: "Estado del rol del administrador:activo o inactivo",
   })
-  status: string;
+  status: Status;
 
-  @OneToMany(() => Administrator, (administrator) => administrator.roles) //un rol puede tener muchos administradores
+  @OneToMany(
+    () => Administrator,
+    (administrator) => administrator.roleAdministrator
+  ) // Un rol administrador posee muchos permisos
   administrator: Administrator[];
+
+  @OneToMany(
+    () => PermissionRoleAdministrator,
+    (permissionRoleAdministrator) =>
+      permissionRoleAdministrator.roleAdministrator
+  ) //Permisos asociados al rol administrador
+  permissionRoleAdministrator: PermissionRoleAdministrator[];
 
   @CreateDateColumn({ comment: "Fecha e creación del rol" })
   createAt: Date;

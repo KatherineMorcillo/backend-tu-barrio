@@ -36,19 +36,19 @@ export class Administrator {
     default: Status.active,
     comment: "Estado del administrador: activo e inactivo",
   })
-  status: string;
+  status: Status;
 
   @ManyToOne(
     () => RoleAdministrator,
     (roleAdministrator) => roleAdministrator.administrator
   ) //Un administrador puede tener un rol
-  roles: RoleAdministrator;
+  roleAdministrator: RoleAdministrator;
 
   @OneToMany(
     () => TokenAdministrator,
     (tokenAdministrator) => tokenAdministrator.administrator
   ) //un administrador puede tener muchos token
-  token: TokenAdministrator[];
+  tokens: TokenAdministrator[];
 
   @CreateDateColumn({ comment: "Fecha de creación del administrador" })
   createdAt: Date;
@@ -58,5 +58,4 @@ export class Administrator {
 
   @DeleteDateColumn({ comment: "Fecha de eliminación del administrador" })
   deleteAt: Date;
-  static roles: any;
 }

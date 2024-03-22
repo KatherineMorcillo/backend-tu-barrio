@@ -5,9 +5,9 @@ import { RoleAdministrator } from "./role_administrator.entity";
 import { TokenAdministrator } from "./token_administrator.entity";
 
 export default [
+  TokenAdministrator,
+  RoleAdministrator,
   Administrator,
   ModulePermissionAdministrator,
   PermissionRoleAdministrator,
-  RoleAdministrator,
-  TokenAdministrator,
 ];
