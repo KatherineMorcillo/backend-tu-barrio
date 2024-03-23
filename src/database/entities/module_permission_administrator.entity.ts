@@ -13,9 +13,9 @@ import { PermissionRoleAdministrator } from "./permission_role_administrator.ent
 @Entity()
 export class ModulePermissionAdministrator {
   @PrimaryGeneratedColumn({
-    comment: "LLave primaria módulo permisos del administrador ejem:productos",
+    comment: "Llave primaria módulo permisos del administrador ejem:productos",
   })
-  id: string;
+  id: number;
 
   @Column({ comment: "Nombre del módulo" })
   name: string;

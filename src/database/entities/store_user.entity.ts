@@ -9,7 +9,7 @@ import {
 
 @Entity()
 export class StoreUser {
-  @PrimaryGeneratedColumn({
+  @PrimaryGeneratedColumn("uuid", {
     comment: "Llave primaria módulo permisos del usuario de la tienda",
   })
   id: string;

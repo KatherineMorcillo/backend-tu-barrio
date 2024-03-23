@@ -10,7 +10,7 @@ import { Status } from "./enums/status.enum";
 
 @Entity()
 export class Store {
-  @PrimaryGeneratedColumn({ comment: "Llave primaria de la tabla store" })
+  @PrimaryGeneratedColumn({ comment: "Llave primaria de la tabla tienda" })
   id: number;
 
   @Column({ comment: "Nombre de la tienda" })
