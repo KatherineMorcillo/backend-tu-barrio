@@ -3,10 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Status } from "./enums/status.enum";
+import { RoleStoreUser } from "./role_store_user.emtity";
 
 @Entity()
 export class PermissionRoleStoreUser {
@@ -35,6 +37,12 @@ export class PermissionRoleStoreUser {
 
   @Column({ comment: "Permiso de visualizar" })
   views: boolean;
+
+  @ManyToOne(
+    () => RoleStoreUser,
+    (roleStoreUser) => roleStoreUser.permissionRoleStoreUser
+  ) // Muchos permisos pertenecen a un rol
+  roleStoreUser: RoleStoreUser;
 
   @CreateDateColumn({
     comment: "Fecha de creación del permiso del rol del administrador",

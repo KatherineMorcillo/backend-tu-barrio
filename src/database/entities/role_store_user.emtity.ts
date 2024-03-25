@@ -9,6 +9,7 @@ import {
 } from "typeorm";
 import { Status } from "./enums/status.enum";
 import { StoreUser } from "./store_user.entity";
+import { PermissionRoleStoreUser } from "./permission_role_store_user.entity";
 
 @Entity()
 export class RoleStoreUser {
@@ -29,6 +30,12 @@ export class RoleStoreUser {
   status: Status;
   @OneToMany(() => StoreUser, (storeUser) => storeUser.roleStoreUser) // Un Rol pertenece a muchos usuarios
   storeUser: StoreUser;
+
+  @OneToMany(
+    () => PermissionRoleStoreUser,
+    (permissionRoleStoreUser) => permissionRoleStoreUser.roleStoreUser
+  ) // Un Rol tiene muchos permisos
+  permissionRoleStoreUser: PermissionRoleStoreUser;
 
   @CreateDateColumn({ comment: "Fecha de creación del rol" })
   createAt: Date;
