@@ -3,9 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Status } from "./enums/status.enum";
+import { TokenStoreUser } from "./token_store_user.entity";
 
 @Entity()
 export class StoreUser {
@@ -23,8 +26,16 @@ export class StoreUser {
   @Column({ comment: "Foto del usuario de la tienda" })
   photo: string;
 
-  @Column({ comment: "Estado del usuario de la tienda: activo o inactivo" })
-  status: string;
+  @Column({
+    type: "enum",
+    enum: Status,
+    default: Status.active,
+    comment: "Estado del usuario de la tienda: activo o inactivo",
+  })
+  status: Status;
+
+  @OneToMany(() => TokenStoreUser, (tokenStoreUser) => tokenStoreUser.storeUser) // Muchos permisos puede tener un rol administrador
+  tokenStoreUser: TokenStoreUser;
 
   @CreateDateColumn({ comment: "Fecha de creación del usuario de la tienda" })
   createAt: Date;

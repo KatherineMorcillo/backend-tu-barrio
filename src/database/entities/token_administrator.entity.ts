@@ -28,7 +28,7 @@ export class TokenAdministrator {
     type: "enum",
     enum: Status,
     default: Status.active,
-    comment: "Estado del token del administrador: inactivo o activo",
+    comment: "Estado del token del administrador: inactivo, activo",
   })
   status: Status;
 

@@ -3,10 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Status } from "./enums/status.enum";
+import { StoreUser } from "./store_user.entity";
 
 @Entity()
 export class TokenStoreUser {
@@ -28,6 +30,9 @@ export class TokenStoreUser {
     comment: "Estado del token del usuario: inactivo, activo",
   })
   status: Status;
+
+  @ManyToOne(() => StoreUser, (storeUser) => storeUser.tokenStoreUser) // Muchos permisos puede tener un rol administrador
+  storeUser: StoreUser;
 
   @CreateDateColumn({ comment: "Fecha de creación del token" })
   createAt: Date;
