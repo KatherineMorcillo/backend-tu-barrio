@@ -3,10 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Status } from "./enums/status.enum";
+import { StoreUser } from "./store_user.entity";
 
 @Entity()
 export class Store {
@@ -29,6 +31,9 @@ export class Store {
     comment: "Estado en el que se encuentra la tienda: activa o inactiva",
   })
   status: Status;
+
+  @OneToMany(() => StoreUser, (storeuser) => storeuser.store) // Una tienda contiene muchos usuarios
+  storeUser: StoreUser;
 
   @CreateDateColumn({ comment: "Fecha de creación de la tienda" })
   createAt: Date;

@@ -31,7 +31,7 @@ export class TokenStoreUser {
   })
   status: Status;
 
-  @ManyToOne(() => StoreUser, (storeUser) => storeUser.tokenStoreUser) // Muchos permisos puede tener un rol administrador
+  @ManyToOne(() => StoreUser, (storeUser) => storeUser.tokenStoreUser) // Muchos token pertenecen a un usuario
   storeUser: StoreUser;
 
   @CreateDateColumn({ comment: "Fecha de creación del token" })

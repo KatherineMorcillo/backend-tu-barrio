@@ -3,10 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Status } from "./enums/status.enum";
+import { StoreUser } from "./store_user.entity";
 
 @Entity()
 export class RoleStoreUser {
@@ -25,6 +27,8 @@ export class RoleStoreUser {
     comment: "Estado del rol: activo, inactivo",
   })
   status: Status;
+  @OneToMany(() => StoreUser, (storeUser) => storeUser.roleStoreUser) // Un Rol pertenece a muchos usuarios
+  storeUser: StoreUser;
 
   @CreateDateColumn({ comment: "Fecha de creación del rol" })
   createAt: Date;

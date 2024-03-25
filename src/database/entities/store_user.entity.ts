@@ -3,12 +3,15 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Status } from "./enums/status.enum";
 import { TokenStoreUser } from "./token_store_user.entity";
+import { RoleStoreUser } from "./role_store_user.emtity";
+import { Store } from "./store.entity";
 
 @Entity()
 export class StoreUser {
@@ -34,8 +37,14 @@ export class StoreUser {
   })
   status: Status;
 
-  @OneToMany(() => TokenStoreUser, (tokenStoreUser) => tokenStoreUser.storeUser) // Muchos permisos puede tener un rol administrador
+  @OneToMany(() => TokenStoreUser, (tokenStoreUser) => tokenStoreUser.storeUser) // Un usuario tiene muchos token
   tokenStoreUser: TokenStoreUser;
+
+  @ManyToOne(() => RoleStoreUser, (roleStoreUser) => roleStoreUser.storeUser) // Muchos usuarios pertenecen a un rol
+  roleStoreUser: RoleStoreUser;
+
+  @ManyToOne(() => Store, (store) => store.storeUser) // Muchos usuarios pertenecen a una tienda
+  store: Store;
 
   @CreateDateColumn({ comment: "Fecha de creación del usuario de la tienda" })
   createAt: Date;
