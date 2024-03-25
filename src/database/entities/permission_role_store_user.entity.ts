@@ -9,6 +9,7 @@ import {
 } from "typeorm";
 import { Status } from "./enums/status.enum";
 import { RoleStoreUser } from "./role_store_user.emtity";
+import { ModulePermissionRoleStoreUser } from "./module_permission_role_store_user.entity,";
 
 @Entity()
 export class PermissionRoleStoreUser {
@@ -43,6 +44,13 @@ export class PermissionRoleStoreUser {
     (roleStoreUser) => roleStoreUser.permissionRoleStoreUser
   ) // Muchos permisos pertenecen a un rol
   roleStoreUser: RoleStoreUser;
+
+  @ManyToOne(
+    () => ModulePermissionRoleStoreUser,
+    (modulePermissionRoleStoreUser) =>
+      modulePermissionRoleStoreUser.permissionRoleStoreUser
+  ) // Muchos permisos pertenecen a un módulo
+  modulePermissionRoleStoreUser: ModulePermissionRoleStoreUser;
 
   @CreateDateColumn({
     comment: "Fecha de creación del permiso del rol del administrador",

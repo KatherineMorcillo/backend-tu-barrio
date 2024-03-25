@@ -3,10 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Status } from "./enums/status.enum";
+import { PermissionRoleStoreUser } from "./permission_role_store_user.entity";
 
 @Entity()
 export class ModulePermissionRoleStoreUser {
@@ -28,6 +30,13 @@ export class ModulePermissionRoleStoreUser {
     comment: "Estado del módulo:activo, inactivo",
   })
   status: Status;
+
+  @OneToMany(
+    () => PermissionRoleStoreUser,
+    (permissionRoleStoreUser) =>
+      permissionRoleStoreUser.modulePermissionRoleStoreUser
+  ) // Un módulo puede tener muchos permisos
+  permissionRoleStoreUser: PermissionRoleStoreUser;
 
   @CreateDateColumn({
     comment: "Fecha de creación del permiso del rol del administrador",
