@@ -28,7 +28,10 @@ export class Administrator {
   email: string;
 
   @Column({ comment: "Foto del administrador" })
-  photo: string;
+  photo?: string;
+
+  @Column({ comment: "Contraseña del administrador", select: false })
+  password: string;
 
   @Column({
     type: "enum",
