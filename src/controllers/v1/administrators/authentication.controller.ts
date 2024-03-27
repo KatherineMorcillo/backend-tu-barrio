@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../../../database/data-source";
 import { Administrator } from "../../../database/entities/administrator.entity";
+import { Decrypt, Hash } from "../../../libraries/crypto";
 
 export class AdministratorAuthenticatorController {
   authentication = async (req: Request, res: Response) => {
@@ -9,6 +10,9 @@ export class AdministratorAuthenticatorController {
     try {
       //Variables request
       const { email, password } = req.body;
+
+      // Desencriptar la contraseña que e envia el sistema (front-end)
+      const passwordDecypt = Decrypt(password);
 
       //Consulta para obtener un administrador según su email SELECT *FROM administrator WHERE email= ?
       const administrator = await administratorEntity.findOne({
@@ -38,7 +42,7 @@ export class AdministratorAuthenticatorController {
       const passwordValidate = await administratorEntity.findOne({
         where: {
           email,
-          password,
+          password: Hash(passwordDecypt),
         },
       });
 
@@ -55,6 +59,7 @@ export class AdministratorAuthenticatorController {
         administrator,
       });
     } catch (error) {
+      console.log(error);
       return res
         .status(500)
         .json({ error, message: "Ocurrió un error en el servidor" });
