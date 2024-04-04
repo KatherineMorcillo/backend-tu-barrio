@@ -22,7 +22,7 @@ export class TokenAdministrator {
   token: string;
 
   @Column({ comment: "Fecha de uso del token" })
-  useDate: string;
+  useDate: Date;
 
   @Column({
     type: "enum",

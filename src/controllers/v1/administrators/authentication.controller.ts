@@ -2,6 +2,10 @@ import { Request, Response } from "express";
 import { AppDataSource } from "../../../database/data-source";
 import { Administrator } from "../../../database/entities/administrator.entity";
 import { Decrypt, Hash } from "../../../libraries/crypto";
+import {
+  GenerateToken,
+  GenerateTokenValidate,
+} from "../../../libraries/jsonwebtoken";
 
 export class AdministratorAuthenticatorController {
   authentication = async (req: Request, res: Response) => {
@@ -53,10 +57,22 @@ export class AdministratorAuthenticatorController {
           .json({ message: "Su contraseña no es correcta" });
       }
 
+      // Generación de Token
+      const token = GenerateToken({ id: administrator.id });
+
+      // guardar token en la tabla llamando la funcion general generateTokenValidate
+      await GenerateTokenValidate(
+        administrator.id,
+        token,
+        "administrator",
+        "administrator"
+      );
+
       //Respuesta si el usuario existe dentro del sistema se envia la información de usuario
       return res.json({
         message: "Login desde el administrador",
         administrator,
+        token,
       });
     } catch (error) {
       console.log(error);
