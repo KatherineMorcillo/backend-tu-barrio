@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon -r dotenv/config --exec ts-node src/index.ts"
+    "dev": "nodemon -r dotenv/config --exec ts-node src/index.ts",
+    "seeders": "npx ts-node -r dotenv/config src/database/seeders/index.ts --no-deprecation"
   },
   "keywords": [],
   "author": "Katerine Morcillo",
