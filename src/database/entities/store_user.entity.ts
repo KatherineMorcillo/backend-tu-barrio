@@ -23,11 +23,17 @@ export class StoreUser {
   @Column({ comment: "Nombres de los usuarios de la tienda" })
   names: string;
 
+  @Column({ comment: "Apellidos de los usuarios de la tienda" })
+  surnames: string;
+
   @Column({ comment: "Correo electrónico del susuario de la tienda" })
   email: string;
 
   @Column({ comment: "Foto del usuario de la tienda" })
   photo: string;
+
+  @Column({ comment: "Contraseña del usuario de la tienda", select: false })
+  password: string;
 
   @Column({
     type: "enum",

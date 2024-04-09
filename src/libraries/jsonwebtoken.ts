@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { AppDataSource } from "../database/data-source";
 import { TokenAdministrator } from "../database/entities/token_administrator.entity";
+import { TokenStoreUser } from "../database/entities/token_store_user.entity";
 
 export const GenerateToken = (text: string | object | Buffer) => {
   return jwt.sign(text, `${process.env.SECRET_JWT}`);
@@ -12,12 +13,17 @@ export const GenerateTokenValidate = async (
   role: string,
   column: string
 ) => {
-  let repository;
+  let repository: any;
 
   //Validación del rol para obtener su respectiva tabla
   if (role === "administrator") {
-    //Obteniendo la tyabla de token asministrator
+    //Obteniendo la tabla de token administrator
     repository = AppDataSource.getRepository(TokenAdministrator);
+  }
+
+  if (role === "storeUser") {
+    //Obteniendo la tabla de token user
+    repository = AppDataSource.getRepository(TokenStoreUser);
   }
 
   console.log({ token, useDate: new Date(), [column]: id });

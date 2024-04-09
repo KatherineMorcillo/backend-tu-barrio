@@ -9,13 +9,13 @@ import {
 
 export class AdministratorAuthenticatorController {
   authentication = async (req: Request, res: Response) => {
-    // Entities
+    // Entidades
     const administratorEntity = AppDataSource.getRepository(Administrator);
     try {
       //Variables request
       const { email, password } = req.body;
 
-      // Desencriptar la contraseña que e envia el sistema (front-end)
+      // Desencriptar la contraseña que envia el sistema (front-end)
       const passwordDecypt = Decrypt(password);
 
       //Consulta para obtener un administrador según su email SELECT *FROM administrator WHERE email= ?
@@ -42,7 +42,7 @@ export class AdministratorAuthenticatorController {
           .json({ message: "El usuario no existe dentro del sistema" });
       }
 
-      //Consulta de validació si el password y el email coinciden SELECT * FROM administrator WHERE email = ? AND password = ?
+      //Consulta de validación si el password y el email coinciden SELECT * FROM administrator WHERE email = ? AND password = ?
       const passwordValidate = await administratorEntity.findOne({
         where: {
           email,

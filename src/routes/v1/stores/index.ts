@@ -4,6 +4,6 @@ import authenticationRouter from "./authentication.router";
 export default () => {
   const router = Router();
 
-  router.use("/authentication", authenticationRouter);
+  router.use("/authentication", authenticationRouter());
   return router;
 };
