@@ -21,7 +21,7 @@ export class ModulePermissionRoleStoreUser {
   name: string;
 
   @Column({ comment: "Ruta del módulo" })
-  routhe: string;
+  route: string;
 
   @Column({
     type: "enum",

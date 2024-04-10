@@ -18,9 +18,6 @@ export class PermissionRoleAdministrator {
   })
   id: number;
 
-  @Column({ comment: "Nombre del permiso" })
-  permission: string;
-
   @Column({
     type: "enum",
     enum: Status,
