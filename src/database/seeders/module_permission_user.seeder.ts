@@ -25,4 +25,5 @@ export async function ModulePermissionStoreSeeder(connection: DataSource) {
       route: "users",
     },
   ];
+  await entity.save(insertEntity);
 }

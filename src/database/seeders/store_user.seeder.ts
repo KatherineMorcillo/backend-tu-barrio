@@ -1,13 +1,13 @@
 import { DataSource } from "typeorm";
-import { Administrator } from "../entities/administrator.entity";
+import { StoreUser } from "../entities/store_user.entity";
 import { faker } from "@faker-js/faker";
 import { Hash } from "../../libraries/crypto";
 
-export default async function AdministradorSeeder(
+export default async function StoreUserSeeder(
   connection: DataSource,
   total: number
 ) {
-  const entity = connection.getRepository(Administrator);
+  const entity = connection.getRepository(StoreUser);
 
   await entity.clear();
 
@@ -20,10 +20,16 @@ export default async function AdministradorSeeder(
       email: faker.internet.email(),
       photo: faker.image.avatar(),
       password: Hash("prueba123"),
-      roleAdministrator: {
+      roleStoreUser: {
         id: faker.helpers.rangeToNumber({
           min: 1,
-          max: 2,
+          max: 3,
+        }),
+      },
+      store: {
+        id: faker.helpers.rangeToNumber({
+          min: 1,
+          max: 3,
         }),
       },
     });

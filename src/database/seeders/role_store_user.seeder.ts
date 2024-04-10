@@ -8,10 +8,14 @@ export async function RoleStoreUserSeeder(connection: DataSource) {
 
   const insertEntity = [
     {
-      name: "Vendedor",
+      name: "Administrador",
     },
     {
-      name: "Usuario",
+      name: "Gerente",
+    },
+    {
+      name: "Coordinador",
     },
   ];
+  await entity.save(insertEntity);
 }

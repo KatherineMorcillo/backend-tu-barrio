@@ -22,7 +22,7 @@ export default async function PermissionRoleAdministratorSeeder(
       updated: true,
       deleted: true,
       views: true,
-      roleAdministrator: { id: 1 },
+      roleAdministrator: { id: 2 },
       module: { id: 2 },
     },
     {
@@ -38,7 +38,7 @@ export default async function PermissionRoleAdministratorSeeder(
       updated: true,
       deleted: true,
       views: true,
-      roleAdministrator: { id: 1 },
+      roleAdministrator: { id: 2 },
       module: { id: 4 },
     },
   ];
